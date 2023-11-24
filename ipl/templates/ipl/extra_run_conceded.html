@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+    Extra Runs Conceded
+{% endblock %}
+
+{% block content %}
+
+    <div id="top-10-economical-bowler"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var data = JSON.parse('{{ data|escapejs }}');
+            const team = data.map(item => item.bowling_team)
+            const runs = data.map(item => item.runs_conceded)
+            Highcharts.chart('top-10-economical-bowler', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Extra runs conceded per team in 2015'
+                },
+                xAxis: {
+                    categories: team,
+                    title: {
+                        text: 'Team'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Extra Runs Given'
+                    }
+                },
+                series: [{
+                    name: 'Extra Runs Given',
+                    data: runs
+                }]
+            });
+        });
+    </script>
+
+{% endblock %}

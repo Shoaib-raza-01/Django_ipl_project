@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+top 10 Economical Bowler
+{% endblock %}
+
+{% block content %}
+
+<div id="top-10-economical-bowler"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const data = JSON.parse('{{ data|escapejs }}');
+        const bowler = data.map(item => item.bowler)
+        const economy = data.map(item => item.economy)
+        Highcharts.chart('top-10-economical-bowler', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Top 10 Economical Bowlers'
+            },
+            xAxis: {
+                categories: bowler,
+                title: {
+                    text: 'Bowler'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Economy'
+                }
+            },
+            series: [{
+                name: 'Economy',
+                data: economy
+            }]
+        });
+    });
+</script>
+
+{% endblock %}

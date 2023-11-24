@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+Matches played per season
+{% endblock %}
+
+{% block content %}
+
+<div id="Matches-per-year"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var data = JSON.parse('{{ data|escapejs }}');
+        const season = data.map(item => item.season)
+        const count = data.map(item => item.count)
+        Highcharts.chart('Matches-per-year', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Matches played per seasons'
+            },
+            xAxis: {
+                categories: season,
+                title: {
+                    text: 'season'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'count'
+                }
+            },
+            series: [{
+                name: 'count',
+                data: count
+            }]
+        });
+    });
+</script>
+
+{% endblock %}

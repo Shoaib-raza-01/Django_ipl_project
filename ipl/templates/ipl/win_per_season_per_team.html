@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Count of wins per team per season
+{% endblock %}
+
+{% block content %}
+
+<div id="stacked-bar-chart-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+    <script>
+        // JavaScript code to generate the stacked bar chart
+        document.addEventListener('DOMContentLoaded', function () {
+            Highcharts.chart('stacked-bar-chart-container', {
+                chart: {
+                    type: 'column',
+                    inveted: false
+                },
+                title: {
+                    text: 'Count of wins per team per season'
+                },
+                xAxis: {
+                    categories: {{ years|safe }}
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total'
+                    }
+                },
+                legend: {
+                    reversed: true
+                },
+                plotOptions: {
+                    series: {
+                        stacking: 'normal',
+                    }
+                },
+                series: {{ series|safe }}
+            });
+        });
+    </script>
+
+{% endblock %}

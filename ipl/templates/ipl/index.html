@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3> Django IPL Project</h3>
+    <ul>
+        <li><a href="{% url 'ipl:matches-per-year' %}"> Number of matches played per year for all the years in IPL.</a></li>
+        <li><a href="{% url 'ipl:matches-per-year' %}">Number of matches won per team per year in IPL.</a></li>
+        <li><a href="{% url 'ipl:matches-per-year' %}">Extra runs conceded per team in the year 2016 </a></li>
+        <li><a href="{% url 'ipl:matches-per-year' %}">Top 10 economical bowlers in the year 2015 </a></li>
+    </ul>
+{% endblock %}
